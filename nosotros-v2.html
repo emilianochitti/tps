@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros — The Partner Spot</title>
+  <link rel="stylesheet" href="styles-v2.css">
+  <style>
+    /* ============================================================
+       NOSOTROS — page-specific styles
+       ============================================================ */
+
+    /* Hero: different image, same structure */
+    .hero-bg--nosotros {
+      background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1800&q=80&auto=format&fit=crop');
+      background-position: center 40%;
+    }
+
+    /* ---- Intro ---- */
+    .nosotros-intro {
+      background: var(--tps-hueso);
+      padding: 120px clamp(40px, 5.5vw, 80px);
+    }
+
+    .nosotros-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .nosotros-intro-left {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+    }
+
+    .nosotros-intro-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .nosotros-subrole {
+      font-family: var(--font-accent);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tps-amber);
+      line-height: 1.6;
+    }
+
+    .nosotros-bullets {
+      padding: 20px 0;
+      border-top: 1px solid var(--border-strong);
+      border-bottom: 1px solid var(--border-strong);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .nosotros-bullet {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 15px;
+      color: var(--tps-deep-blue);
+    }
+
+    .nosotros-bullet-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--tps-amber);
+      flex-shrink: 0;
+    }
+
+    .nosotros-intro-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .nosotros-quote {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(32px, 3.6vw, 58px);
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      color: var(--tps-deep-blue);
+      margin: 0;
+    }
+
+    .nosotros-quote em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--tps-naranja-terra);
+    }
+
+    .nosotros-story {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--tps-deep-blue-70);
+      margin: 0;
+      max-width: 640px;
+    }
+
+    /* Misión / Visión blocks */
+    .nosotros-intro-heading {
+      padding-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nosotros-intro-heading .nosotros-subrole {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(32px, 3.2vw, 52px);
+      letter-spacing: -0.02em;
+      text-transform: none;
+      line-height: 1.05;
+      color: var(--tps-deep-blue);
+      margin-top: 10px;
+    }
+
+    .nosotros-mv-block {
+      padding: 32px 0;
+      border-top: 1px solid var(--border-strong);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .nosotros-mv-block:last-of-type {
+      border-bottom: 1px solid var(--border-strong);
+      margin-bottom: 36px;
+    }
+    .nosotros-mv-label {
+      font-family: var(--font-accent);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--tps-amber);
+    }
+    .nosotros-mv-text {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--tps-deep-blue-70);
+      margin: 0;
+    }
+
+    /* ---- Filosofía ---- */
+    .nosotros-filosofia {
+      position: relative;
+      background-image:
+        linear-gradient(180deg, rgba(0,46,71,0.88) 0%, rgba(0,46,71,0.96) 100%),
+        url('https://images.unsplash.com/photo-1573164713619-24c711fe7878?w=1600&q=80&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      padding: 140px clamp(40px, 5.5vw, 80px);
+      text-align: center;
+    }
+
+    .nosotros-filosofia-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .nosotros-filosofia-text {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(20px, 2.4vw, 36px);
+      line-height: 1.35;
+      letter-spacing: -0.005em;
+      color: var(--tps-hueso);
+      margin: 28px 0 0;
+    }
+
+    .nosotros-filosofia-text em {
+      font-style: italic;
+      color: var(--tps-amber);
+    }
+
+    .nosotros-filosofia-attr {
+      margin-top: 48px;
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--tps-amber);
+      opacity: 0.8;
+    }
+
+    /* ---- Valores ---- */
+    .nosotros-valores {
+      background: var(--tps-hueso-soft);
+      padding: 120px clamp(40px, 5.5vw, 80px);
+    }
+
+    .nosotros-valores-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+
+    .nosotros-valores-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(36px, 4.2vw, 68px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: var(--tps-deep-blue);
+      margin: 20px 0 0;
+    }
+
+    .nosotros-valores-desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--tps-deep-blue-70);
+      margin: 0;
+      align-self: end;
+    }
+
+    .nosotros-valores-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+    }
+
+    .nosotros-valor {
+      background: var(--tps-hueso);
+      padding: 48px 36px 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: background 280ms ease;
+    }
+
+    .nosotros-valor:hover {
+      background: var(--tps-deep-blue);
+    }
+
+    .nosotros-valor-n {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--tps-amber);
+    }
+
+    .nosotros-valor-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(22px, 2vw, 30px);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--tps-deep-blue);
+      margin: 0;
+      transition: color 280ms ease;
+    }
+
+    .nosotros-valor:hover .nosotros-valor-title {
+      color: var(--tps-hueso);
+    }
+
+    .nosotros-valor-desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--tps-deep-blue-70);
+      margin: 0;
+      transition: color 280ms ease;
+    }
+
+    .nosotros-valor:hover .nosotros-valor-desc {
+      color: #B8CAD3;
+    }
+
+    /* ---- Historia strip ---- */
+    .nosotros-historia {
+      background: var(--tps-deep-blue);
+      padding: 80px clamp(40px, 5.5vw, 80px);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nosotros-hito {
+      padding: 40px 40px 40px 0;
+      border-right: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nosotros-hito:last-child {
+      border-right: none;
+      padding-left: 40px;
+      padding-right: 0;
+    }
+
+    .nosotros-hito:not(:first-child):not(:last-child) {
+      padding-left: 40px;
+    }
+
+    .nosotros-hito-year {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(48px, 5vw, 80px);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      color: var(--tps-amber);
+    }
+
+    .nosotros-hito-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 1.2;
+      color: var(--tps-hueso);
+      margin: 0;
+    }
+
+    .nosotros-hito-desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.65;
+      color: #B8CAD3;
+      margin: 0;
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE
+       ============================================================ */
+    @media (max-width: 640px) {
+      .hero-bg--nosotros { background-position: 72% 40%; }
+
+      .nosotros-intro { padding: 80px 20px; }
+
+      .nosotros-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .nosotros-intro-left { position: static; aspect-ratio: 3 / 2; }
+
+      .nosotros-intro-heading .nosotros-subrole {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: clamp(36px, 9vw, 48px);
+        letter-spacing: -0.02em;
+        text-transform: none;
+        line-height: 1.05;
+        color: var(--tps-deep-blue);
+        margin-top: 6px;
+      }
+
+      .nosotros-filosofia { padding: 100px 20px; }
+
+      .nosotros-valores { padding: 80px 20px; }
+
+      .nosotros-valores-header {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+
+      .nosotros-valores-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nosotros-valor { padding: 36px 24px 40px; }
+
+      .nosotros-valor:last-child {
+        grid-column: 1 / -1;
+        padding: 28px 24px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 20px;
+      }
+
+      .nosotros-valor:last-child .nosotros-valor-title {
+        font-size: 18px;
+        flex: 1;
+        min-width: 160px;
+      }
+
+      .nosotros-valor:last-child .nosotros-valor-desc {
+        flex: 2;
+        min-width: 200px;
+        font-size: 14px;
+      }
+
+      .nosotros-historia {
+        grid-template-columns: 1fr;
+        padding: 64px 20px;
+      }
+
+      .nosotros-hito {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.10);
+        padding: 32px 0;
+      }
+
+      .nosotros-hito:last-child {
+        padding-left: 0;
+        border-bottom: none;
+      }
+
+      .nosotros-hito:not(:first-child):not(:last-child) {
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 900px) and (min-width: 641px) {
+      .nosotros-valores-grid { grid-template-columns: repeat(3, 1fr); }
+
+      .nosotros-historia { grid-template-columns: 1fr; }
+
+      .nosotros-hito {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.10);
+        padding: 36px 0;
+      }
+
+      .nosotros-hito:last-child {
+        border-bottom: none;
+        padding-left: 0;
+      }
+
+      .nosotros-hito:not(:first-child):not(:last-child) { padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======================================================
+       HEADER
+       ====================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <a href="index-v2.html" class="header-logo">
+        <img src="assets/logo-deep-blue-bg.png" alt="The Partner Spot">
+      </a>
+
+      <nav class="header-nav">
+        <a href="mercados-v3.html" class="nav-link">Mercados</a>
+        <a href="#" class="nav-link" style="opacity:1; font-weight:600">Nosotros</a>
+        <a href="contacto-v2.html" class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="btn-tienda">
+          IR A LA TIENDA
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7M9 7h8v8"/>
+          </svg>
+        </a>
+        <button class="nav-toggle" aria-label="Menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile nav drawer -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="mercados-v3.html" class="mobile-nav-link">Mercados</a>
+    <a href="#" class="mobile-nav-link">Nosotros</a>
+    <a href="contacto-v2.html" class="mobile-nav-link">Contacto</a>
+    <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="mobile-nav-cta">Ir a la tienda →</a>
+  </div>
+
+  <!-- ======================================================
+       HERO
+       ====================================================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg hero-bg--nosotros"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img
+        src="assets/logo-hueso-big.png"
+        alt="The Partner Spot"
+        class="hero-logo"
+      >
+      <h1 class="hero-title">
+        No somos un<br>
+        proveedor.<br>
+        <em class="hero-accent">Somos tu socio.</em>
+      </h1>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       TICKER
+       ====================================================== -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item">60+ Años de experiencia</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Familia fundadora</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Comercio exterior</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Caribe &amp; Centroamérica</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Respaldo financiero</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Relación de largo plazo</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Buenos Aires, Argentina</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Abastecimiento confiable</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">60+ Años de experiencia</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Familia fundadora</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Comercio exterior</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Caribe &amp; Centroamérica</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Respaldo financiero</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Relación de largo plazo</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Buenos Aires, Argentina</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Abastecimiento confiable</span><span class="ticker-dot">●</span>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       QUIÉNES SOMOS
+       ====================================================== -->
+  <section class="nosotros-intro" id="quienes-somos">
+    <div class="nosotros-intro-grid">
+
+      <div class="nosotros-intro-left reveal">
+        <img
+          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop"
+          alt="The Partner Spot — equipo"
+          class="nosotros-intro-img"
+        >
+      </div>
+
+      <div class="nosotros-intro-right">
+        <div class="nosotros-intro-heading reveal">
+          <div class="eyebrow eyebrow--dark">Quiénes somos</div>
+          <div class="nosotros-subrole">Socio estratégico<br>· no proveedor</div>
+        </div>
+        <div class="nosotros-mv-block reveal" style="--reveal-delay:60ms">
+          <span class="nosotros-mv-label">Misión</span>
+          <p class="nosotros-mv-text">Nuestra misión es acompañar a nuestros partners con abastecimiento confiable, respaldo financiero y presencia activa en los mercados más exigentes del mundo. Creemos que el valor real no está en una sola operación, sino en la continuidad de una relación.</p>
+        </div>
+        <div class="nosotros-mv-block reveal" style="--reveal-delay:120ms">
+          <span class="nosotros-mv-label">Visión</span>
+          <p class="nosotros-mv-text">Ser la plataforma de referencia para el comercio y abastecimiento en los mercados emergentes del Caribe, Centroamérica y África, construyendo puentes entre productores y distribuidores que otros no están dispuestos a cruzar.</p>
+        </div>
+        <div class="reveal" style="--reveal-delay:180ms">
+          <a href="#historia" class="btn-outline-dark">Conocé la historia</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================
+       FILOSOFÍA
+       ====================================================== -->
+  <section class="nosotros-filosofia">
+    <div class="nosotros-filosofia-inner">
+      <div class="eyebrow reveal" style="justify-content:center; color:var(--tps-amber)">Nuestra filosofía</div>
+      <p class="nosotros-filosofia-text reveal" style="--reveal-delay:80ms">
+        "Somos un grupo de personas que decidió adentrarse en mercados que muchas empresas, proveedores y clientes consideran exigentes, desafiantes y, en algunos casos, incluso problemáticos. Nuestro objetivo es generar
+        <em>relaciones de largo plazo</em>
+        y brindar soluciones concretas a las necesidades tanto de clientes como de proveedores."
+      </p>
+      <div class="nosotros-filosofia-attr reveal" style="--reveal-delay:160ms">
+        Miguel Ángel Rodríguez Ruiz · COO
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       HISTORIA
+       ====================================================== -->
+  <div class="nosotros-historia" id="historia">
+    <div class="nosotros-hito reveal">
+      <div class="nosotros-hito-year">60+</div>
+      <h3 class="nosotros-hito-title">Años de experiencia en comercio exterior</h3>
+      <p class="nosotros-hito-desc">Raíces en la industria de la carne vacuna argentina, uno de los sectores de exportación más competitivos del mundo.</p>
+    </div>
+    <div class="nosotros-hito reveal" style="--reveal-delay:100ms">
+      <div class="nosotros-hito-year">2020</div>
+      <h3 class="nosotros-hito-title">Fundación de The Partner Spot</h3>
+      <p class="nosotros-hito-desc">Nace como plataforma integral de abastecimiento con foco en el Caribe — uniendo legado familiar con visión comercial moderna.</p>
+    </div>
+    <div class="nosotros-hito reveal" style="--reveal-delay:200ms">
+      <div class="nosotros-hito-year">Hoy</div>
+      <h3 class="nosotros-hito-title">9 países de origen, 3 monedas, 5 categorías</h3>
+      <p class="nosotros-hito-desc">Una red consolidada que sigue creciendo hacia Haití, Jamaica, Panamá y más mercados del Caribe y Centroamérica.</p>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       VALORES
+       ====================================================== -->
+  <section class="nosotros-valores" id="valores">
+    <div class="nosotros-valores-header">
+      <div>
+        <div class="eyebrow eyebrow--dark reveal">Cómo trabajamos</div>
+        <h2 class="nosotros-valores-title reveal" style="--reveal-delay:80ms">
+          Cinco pilares<br>que nos definen.
+        </h2>
+      </div>
+      <p class="nosotros-valores-desc reveal" style="--reveal-delay:120ms">
+        No son frases de una presentación. Son los principios que guían cada conversación, cada operación y cada decisión que tomamos junto a nuestros distribuidores.
+      </p>
+    </div>
+
+    <div class="nosotros-valores-grid">
+
+      <div class="nosotros-valor reveal" style="--reveal-delay:0ms">
+        <span class="nosotros-valor-n">01</span>
+        <h3 class="nosotros-valor-title">Lealtad y Confianza</h3>
+        <p class="nosotros-valor-desc">Construimos relaciones antes que carteras de clientes. La confianza se gana operación a operación, y nunca la ponemos en riesgo por una ganancia a corto plazo.</p>
+      </div>
+
+      <div class="nosotros-valor reveal" style="--reveal-delay:60ms">
+        <span class="nosotros-valor-n">02</span>
+        <h3 class="nosotros-valor-title">Compromiso Real</h3>
+        <p class="nosotros-valor-desc">No prometemos lo que no podemos cumplir. Cada acuerdo es una responsabilidad que asumimos con nuestra estructura, nuestro equipo y nuestra red.</p>
+      </div>
+
+      <div class="nosotros-valor reveal" style="--reveal-delay:120ms">
+        <span class="nosotros-valor-n">03</span>
+        <h3 class="nosotros-valor-title">Seguridad y Previsibilidad</h3>
+        <p class="nosotros-valor-desc">Garantizamos continuidad en la cadena de abastecimiento incluso ante disrupciones. Somos el socio que sigue cuando el contexto se complica.</p>
+      </div>
+
+      <div class="nosotros-valor reveal" style="--reveal-delay:180ms">
+        <span class="nosotros-valor-n">04</span>
+        <h3 class="nosotros-valor-title">Eficiencia Operativa</h3>
+        <p class="nosotros-valor-desc">Optimizamos cada etapa del proceso para que el costo de operar con nosotros sea siempre una ventaja competitiva para el distribuidor.</p>
+      </div>
+
+      <div class="nosotros-valor reveal" style="--reveal-delay:240ms">
+        <span class="nosotros-valor-n">05</span>
+        <h3 class="nosotros-valor-title">Responsabilidad con la Comunidad</h3>
+        <p class="nosotros-valor-desc">El impacto de nuestras operaciones va más allá del negocio. Trabajamos con conciencia del entorno social y económico de los mercados donde operamos.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================
+       MAPA — Presencia global
+       ====================================================== -->
+  <section class="mapa" id="presencia">
+
+    <div class="mapa-header">
+      <div class="mapa-header-left">
+        <div class="eyebrow eyebrow--dark reveal">Presencia global</div>
+        <h2 class="mapa-title reveal" style="--reveal-delay:80ms">Una red que<br>conecta mercados.</h2>
+      </div>
+      <p class="mapa-desc reveal" style="--reveal-delay:160ms">
+        Compramos a productores internacionales y abastecemos a distribuidores del Caribe y Centroamérica. Con proyección de expansión regional.
+      </p>
+    </div>
+
+    <div class="mapa-wrap reveal" style="--reveal-delay:80ms">
+      <svg id="world-svg-el" class="world-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+
+      <div class="markers-layer">
+        <div class="mpin mpin--featured" style="--mx:28.1%;--my:37.8%">
+          <div class="mpin-pulse"></div>
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Cuba <span>Operación 80%</span></div>
+        </div>
+        <div class="mpin mpin--origin" style="--mx:20.6%;--my:18.9%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Canadá</div>
+        </div>
+        <div class="mpin mpin--origin" style="--mx:22.8%;--my:28.3%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Estados Unidos</div>
+        </div>
+        <div class="mpin mpin--hq" style="--mx:32.2%;--my:68.9%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Argentina <span>Headquarter</span></div>
+        </div>
+        <div class="mpin mpin--origin" style="--mx:35.0%;--my:68.3%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Uruguay</div>
+        </div>
+        <div class="mpin mpin--origin" style="--mx:49.2%;--my:27.8%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">España</div>
+        </div>
+        <div class="mpin mpin--origin" style="--mx:58.3%;--my:35.0%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Egipto</div>
+        </div>
+        <div class="mpin mpin--origin" style="--mx:75.0%;--my:16.7%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Rusia</div>
+        </div>
+        <div class="mpin mpin--origin" style="--mx:56.7%;--my:66.1%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Sudáfrica</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapa-stats">
+      <div class="mapa-stat reveal" style="--reveal-delay:0ms">
+        <div class="mapa-stat-key">Destinos principales</div>
+        <div class="mapa-stat-val">Cuba · Rep. Dominicana</div>
+        <div class="mapa-stat-sub">80% / 20% del volumen</div>
+      </div>
+      <div class="mapa-stat reveal" style="--reveal-delay:100ms">
+        <div class="mapa-stat-key">Expansión proyectada</div>
+        <div class="mapa-stat-val">Caribe &amp; Centroamérica</div>
+        <div class="mapa-stat-sub">Haití · Jamaica · Panamá</div>
+      </div>
+      <div class="mapa-stat reveal" style="--reveal-delay:200ms">
+        <div class="mapa-stat-key">Países de origen</div>
+        <div class="mapa-stat-val">9 países · 4 continentes</div>
+        <div class="mapa-stat-sub">USA · UY · AR · ES · EG · CA · RU · ZA</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================================================
+       CTA FINAL
+       ====================================================== -->
+  <section class="cta-final" id="contacto">
+    <div class="eyebrow reveal" style="justify-content:center; color:var(--tps-deep-blue)">Sumate a la red</div>
+    <h2 class="cta-final-title reveal" style="--reveal-delay:80ms">
+      Contá con<br>
+      <em class="cta-final-em">nosotros<span class="cta-final-dot">.</span></em>
+    </h2>
+    <p class="cta-final-body reveal" style="--reveal-delay:160ms">
+      Contanos sobre tu operación y un partner comercial se va a comunicar con vos en menos de 48 hs.
+    </p>
+    <div class="cta-final-actions reveal" style="--reveal-delay:240ms">
+      <a href="mailto:info@tpsglobal.com" class="btn-primary">Hablemos</a>
+      <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="btn-outline-dark">Ir a la tienda</a>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer class="site-footer-main" id="footer">
+
+    <div aria-hidden class="footer-watermark">Contá con nosotros.</div>
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <img src="assets/logo-negativo.png" alt="The Partner Spot" class="footer-logo">
+        <p class="footer-tagline">
+          Somos un socio de largo plazo.<br>
+          <em>No un proveedor más.</em>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Unidades</div>
+        <a href="index-v2.html#mercados">Proteínas</a>
+        <a href="index-v2.html#mercados">Alimentos Básicos</a>
+        <a href="index-v2.html#mercados">Soluciones Comerciales</a>
+        <a href="index-v2.html#mercados">Más Allá de los Alimentos</a>
+        <a href="index-v2.html#mercados">Energías Renovables</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <a href="#">Nosotros</a>
+        <a href="#">Contexto de mercado</a>
+        <a href="#">Historia</a>
+        <a href="#">Valores</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <div class="footer-col footer-col--contact">
+        <div class="footer-col-title">Contacto</div>
+        <span class="footer-contact-row">
+          <a href="mailto:info@tpsglobal.com">info@tpsglobal.com</a>
+          <span class="footer-contact-sep">·</span>
+          <a href="tel:+5491100000000">+54 9 11 0000 0000</a>
+        </span>
+        <span>Buenos Aires, Argentina</span>
+        <a href="https://market.themeatspot.com/" target="_blank" rel="noopener">Tienda online →</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 The Partner Spot ®. Todos los derechos reservados.</span>
+      <span class="footer-bottom-tag">TPS · Tu socio a largo plazo</span>
+    </div>
+
+  </footer>
+
+  <!-- ======================================================
+       SCRIPTS
+       ====================================================== -->
+  <script>
+    // Header scroll
+    const header = document.getElementById('site-header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 64);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Hamburger
+    const navToggle = document.querySelector('.nav-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    navToggle.addEventListener('click', () => {
+      const isOpen = header.classList.toggle('menu-open');
+      mobileNav.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        header.classList.remove('menu-open');
+        mobileNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+  <!-- D3 + TopoJSON para el mapa -->
+  <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+  <script>
+    (async function () {
+      const W = 1000, H = 500;
+      const projection = d3.geoEquirectangular().scale(159.15).translate([W / 2, H / 2]);
+      const path = d3.geoPath().projection(projection);
+      const svg  = d3.select('#world-svg-el');
+
+      const world = await fetch('https://unpkg.com/world-atlas@2/countries-110m.json').then(r => r.json());
+
+      svg.append('g')
+        .selectAll('path')
+        .data(topojson.feature(world, world.objects.countries).features)
+        .join('path')
+        .attr('d', path)
+        .attr('fill', 'rgba(0,46,71,0.10)')
+        .attr('stroke', 'rgba(242,236,227,1)')
+        .attr('stroke-width', '0.7');
+
+      const cuba = [-79, 22];
+      const origins = [[-106,56],[-98,39],[-64,-34],[-56,-33],[-3,40],[30,27],[90,60],[24,-29]];
+
+      svg.append('g')
+        .selectAll('path')
+        .data(origins)
+        .join('path')
+        .attr('d', d => path({ type: 'LineString', coordinates: [d, cuba] }))
+        .attr('fill', 'none')
+        .attr('stroke', 'rgba(224,127,0,0.38)')
+        .attr('stroke-width', '1.1')
+        .attr('stroke-dasharray', '4 6');
+    })().catch(console.error);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Partner Spot — Contá con nosotros</title>
+  <link rel="stylesheet" href="styles-v2.css">
+</head>
+<body>
+
+  <!-- ======================================================
+       HEADER
+       ====================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <a href="#" class="header-logo">
+        <img src="assets/logo-deep-blue-bg.png" alt="The Partner Spot">
+      </a>
+
+      <nav class="header-nav">
+        <a href="mercados-v3.html" class="nav-link">Mercados</a>
+        <a href="nosotros-v2.html" class="nav-link">Nosotros</a>
+        <a href="contacto-v2.html" class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="btn-tienda">
+          IR A LA TIENDA
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7M9 7h8v8"/>
+          </svg>
+        </a>
+        <button class="nav-toggle" aria-label="Menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile nav drawer (sibling of header, outside) -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="mercados-v3.html" class="mobile-nav-link">Mercados</a>
+    <a href="nosotros-v2.html" class="mobile-nav-link">Nosotros</a>
+    <a href="contacto-v2.html" class="mobile-nav-link">Contacto</a>
+    <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="mobile-nav-cta">Ir a la tienda →</a>
+  </div>
+
+  <!-- ======================================================
+       HERO
+       ====================================================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img
+        src="assets/logo-hueso-big.png"
+        alt="The Partner Spot"
+        class="hero-logo"
+      >
+      <h1 class="hero-title">
+        Tu socio<br>
+        de abastecimiento y<br>
+        <em class="hero-accent">soluciones comerciales</em>
+      </h1>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       TICKER
+       ====================================================== -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <!-- Set 1 -->
+      <span class="ticker-item">Proteínas</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Alimentos Básicos</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Energías Renovables</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Soluciones Comerciales</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Más Allá de los Alimentos</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Cuba</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Rep. Dominicana</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Haití</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">60+ Años de Experiencia</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Jamaica</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Panamá</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">3 Monedas Aceptadas</span><span class="ticker-dot">●</span>
+      <!-- Set 2 — duplicado para loop continuo -->
+      <span class="ticker-item">Proteínas</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Alimentos Básicos</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Energías Renovables</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Soluciones Comerciales</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Más Allá de los Alimentos</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Cuba</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Rep. Dominicana</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Haití</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">60+ Años de Experiencia</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Jamaica</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">Panamá</span><span class="ticker-dot">●</span>
+      <span class="ticker-item">3 Monedas Aceptadas</span><span class="ticker-dot">●</span>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       STATS BAR
+       ====================================================== -->
+  <div class="stats-bar" id="stats-bar">
+    <div class="stat">
+      <div class="stat-num" data-target="60" data-prefix="+" data-suffix="">0</div>
+      <div class="stat-label">Años de experiencia</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-target="80" data-suffix="%">0</div>
+      <div class="stat-label">Operación en Cuba</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-target="9" data-suffix="">0</div>
+      <div class="stat-label">Países de origen</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" data-target="5" data-suffix="">0</div>
+      <div class="stat-label">Categorías de producto</div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       CATEGORÍAS — Header
+       ====================================================== -->
+  <section class="cats-header" id="mercados">
+    <div class="cats-header-grid">
+      <div class="cats-header-left">
+        <div class="eyebrow eyebrow--dark reveal">Qué comercializamos</div>
+        <h2 class="cats-title reveal" style="--reveal-delay:80ms">Cinco categorías,<br>una sola red<br>de abastecimiento.</h2>
+      </div>
+      <p class="cats-desc reveal" style="--reveal-delay:160ms">
+        Integramos alimentos, energía y soluciones comerciales bajo un mismo partner. El objetivo no es vender productos aislados, sino sostener la operación completa de nuestros distribuidores.
+      </p>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       CATEGORÍAS — Cards
+       ====================================================== -->
+  <section class="cats-cards">
+    <div class="cats-grid">
+
+      <div class="cat-card reveal" style="--clr:#9A2800; --img:url('https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=900&q=80&auto=format&fit=crop'); --reveal-delay:0ms">
+        <span class="cat-n">01</span>
+        <div class="cat-bottom">
+          <p class="cat-tag-label">Carnes &amp; Proteínas</p>
+          <h3 class="cat-name">Proteínas</h3>
+          <p class="cat-desc">Carnes bovinas, pollo, cerdo y otras proteínas de origen verificado.</p>
+        </div>
+      </div>
+
+      <div class="cat-card reveal" style="--clr:#474500; --img:url('https://images.unsplash.com/photo-1586201375761-83865001e31c?w=900&q=80&auto=format&fit=crop'); --reveal-delay:80ms">
+        <span class="cat-n">02</span>
+        <div class="cat-bottom">
+          <p class="cat-tag-label">Primera necesidad</p>
+          <h3 class="cat-name">Alimentos Básicos</h3>
+          <p class="cat-desc">Arroz, legumbres, aceites, harina, azúcar y productos de primera necesidad.</p>
+        </div>
+      </div>
+
+      <div class="cat-card reveal" style="--clr:#002E47; --img:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=80&auto=format&fit=crop'); --reveal-delay:160ms">
+        <span class="cat-n">03</span>
+        <div class="cat-bottom">
+          <p class="cat-tag-label">Financiamiento &amp; logística</p>
+          <h3 class="cat-name">Soluciones Comerciales</h3>
+          <p class="cat-desc">Financiación, logística, abastecimiento especial y soporte operativo integrado.</p>
+        </div>
+      </div>
+
+      <div class="cat-card reveal" style="--clr:#472800; --img:url('https://images.unsplash.com/photo-1605732562742-3023a888e56e?w=900&q=80&auto=format&fit=crop'); --reveal-delay:240ms">
+        <span class="cat-n">04</span>
+        <div class="cat-bottom">
+          <p class="cat-tag-label">Electrónicos &amp; construcción</p>
+          <h3 class="cat-name">Más Allá de los Alimentos</h3>
+          <p class="cat-desc">Electrónicos, materiales de construcción y otras categorías estratégicas.</p>
+        </div>
+      </div>
+
+      <div class="cat-card reveal" style="--clr:#C04A00; --img:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=80&auto=format&fit=crop'); --reveal-delay:320ms">
+        <span class="cat-n">05</span>
+        <div class="cat-bottom">
+          <p class="cat-tag-label">Energía para operar</p>
+          <h3 class="cat-name">Energías Renovables</h3>
+          <p class="cat-desc">Soluciones de energía para sostener la operación en entornos con limitaciones de suministro.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================
+       POR QUÉ TPS
+       ====================================================== -->
+  <section class="porque" id="diferencial">
+    <div class="porque-grid">
+
+      <!-- Columna izquierda — sticky -->
+      <div class="porque-left">
+        <div class="eyebrow eyebrow--dark reveal">Por qué TPS</div>
+        <h2 class="porque-title reveal" style="--reveal-delay:80ms">
+          Facilitamos lo que<br>el contexto<br>
+          <em class="porque-em">dificulta.</em>
+        </h2>
+        <p class="porque-body reveal" style="--reveal-delay:160ms">
+          Operamos donde los grandes jugadores globales no llegan, construyendo estabilidad en entornos donde la incertidumbre forma parte de la realidad cotidiana.
+        </p>
+      </div>
+
+      <!-- Columna derecha — lista -->
+      <div class="porque-right">
+        <div class="porque-item reveal" style="--reveal-delay:0ms">
+          <span class="porque-n">01</span>
+          <div class="porque-item-content">
+            <h3 class="porque-item-title">Pre-financiamiento a distribuidores</h3>
+            <p class="porque-item-desc">Convertimos la barrera financiera en oportunidad — accedé a mejor costo de producto y reducí barreras de entrada.</p>
+          </div>
+        </div>
+        <div class="porque-item reveal" style="--reveal-delay:80ms">
+          <span class="porque-n">02</span>
+          <div class="porque-item-content">
+            <h3 class="porque-item-title">Flexibilidad de pago</h3>
+            <p class="porque-item-desc">USD, EUR o moneda local. Adaptamos la operación a la realidad financiera de cada mercado.</p>
+          </div>
+        </div>
+        <div class="porque-item reveal" style="--reveal-delay:160ms">
+          <span class="porque-n">03</span>
+          <div class="porque-item-content">
+            <h3 class="porque-item-title">Acompañamiento real</h3>
+            <p class="porque-item-desc">Priorizamos el vínculo por sobre la venta — incluso recomendamos alternativas cuando son mejor para vos.</p>
+          </div>
+        </div>
+        <div class="porque-item reveal" style="--reveal-delay:240ms">
+          <span class="porque-n">04</span>
+          <div class="porque-item-content">
+            <h3 class="porque-item-title">Logística ágil y criterio</h3>
+            <p class="porque-item-desc">Red consolidada en el Caribe y entendimiento profundo del mercado. Entregamos donde otros no llegan.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================
+       MAPA — Presencia global
+       ====================================================== -->
+  <section class="mapa" id="presencia">
+
+    <div class="mapa-header">
+      <div class="mapa-header-left">
+        <div class="eyebrow eyebrow--dark reveal">Presencia global</div>
+        <h2 class="mapa-title reveal" style="--reveal-delay:80ms">Una red que<br>conecta mercados.</h2>
+      </div>
+      <p class="mapa-desc reveal" style="--reveal-delay:160ms">
+        Compramos a productores internacionales y abastecemos a distribuidores del Caribe y Centroamérica. Con proyección de expansión regional.
+      </p>
+    </div>
+
+    <div class="mapa-wrap reveal" style="--reveal-delay:80ms">
+      <!-- SVG: renderizado por D3 -->
+      <svg id="world-svg-el" class="world-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+
+      <!-- Marcadores HTML sobre el SVG -->
+      <div class="markers-layer">
+
+        <!-- Cuba — destino principal -->
+        <div class="mpin mpin--featured" style="--mx:28.1%;--my:37.8%">
+          <div class="mpin-pulse"></div>
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Cuba <span>Operación 80%</span></div>
+        </div>
+
+        <!-- Canadá -->
+        <div class="mpin mpin--origin" style="--mx:20.6%;--my:18.9%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Canadá</div>
+        </div>
+
+        <!-- Estados Unidos -->
+        <div class="mpin mpin--origin" style="--mx:22.8%;--my:28.3%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Estados Unidos</div>
+        </div>
+
+        <!-- Argentina — HQ -->
+        <div class="mpin mpin--hq" style="--mx:32.2%;--my:68.9%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Argentina <span>Headquarter</span></div>
+        </div>
+
+        <!-- Uruguay -->
+        <div class="mpin mpin--origin" style="--mx:35.0%;--my:68.3%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Uruguay</div>
+        </div>
+
+        <!-- España -->
+        <div class="mpin mpin--origin" style="--mx:49.2%;--my:27.8%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">España</div>
+        </div>
+
+        <!-- Egipto -->
+        <div class="mpin mpin--origin" style="--mx:58.3%;--my:35.0%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Egipto</div>
+        </div>
+
+        <!-- Rusia -->
+        <div class="mpin mpin--origin" style="--mx:75.0%;--my:16.7%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Rusia</div>
+        </div>
+
+        <!-- Sudáfrica -->
+        <div class="mpin mpin--origin" style="--mx:56.7%;--my:66.1%">
+          <div class="mpin-dot"></div>
+          <div class="mpin-tip">Sudáfrica</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Stats inferiores -->
+    <div class="mapa-stats">
+      <div class="mapa-stat reveal" style="--reveal-delay:0ms">
+        <div class="mapa-stat-key">Destinos principales</div>
+        <div class="mapa-stat-val">Cuba · Rep. Dominicana</div>
+        <div class="mapa-stat-sub">80% / 20% del volumen</div>
+      </div>
+      <div class="mapa-stat reveal" style="--reveal-delay:100ms">
+        <div class="mapa-stat-key">Expansión proyectada</div>
+        <div class="mapa-stat-val">Caribe &amp; Centroamérica</div>
+        <div class="mapa-stat-sub">Haití · Jamaica · Panamá</div>
+      </div>
+      <div class="mapa-stat reveal" style="--reveal-delay:200ms">
+        <div class="mapa-stat-key">Países de origen</div>
+        <div class="mapa-stat-val">9 países · 4 continentes</div>
+        <div class="mapa-stat-sub">USA · UY · AR · ES · EG · CA · RU · ZA</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================================================
+       CTA FINAL
+       ====================================================== -->
+  <section class="cta-final" id="contacto">
+    <div class="eyebrow reveal" style="justify-content:center; color:var(--tps-deep-blue)">Sumate a la red</div>
+    <h2 class="cta-final-title reveal" style="--reveal-delay:80ms">
+      Contá con<br>
+      <em class="cta-final-em">nosotros<span class="cta-final-dot">.</span></em>
+    </h2>
+    <p class="cta-final-body reveal" style="--reveal-delay:160ms">
+      Contanos sobre tu operación y un partner comercial se va a comunicar con vos en menos de 48 hs.
+    </p>
+    <div class="cta-final-actions reveal" style="--reveal-delay:240ms">
+      <a href="mailto:info@tpsglobal.com" class="btn-primary">Hablemos</a>
+      <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="btn-outline-dark">Ir a la tienda</a>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer class="site-footer-main" id="footer">
+
+    <div aria-hidden class="footer-watermark">Contá con nosotros.</div>
+
+    <div class="footer-grid">
+
+      <!-- Brand: logo + tagline en la misma fila -->
+      <div class="footer-brand">
+        <img src="assets/logo-negativo.png" alt="The Partner Spot" class="footer-logo">
+        <p class="footer-tagline">
+          Somos un socio de largo plazo.<br>
+          <em>No un proveedor más.</em>
+        </p>
+      </div>
+
+      <!-- Unidades + Empresa: una columna cada uno, misma fila -->
+      <div class="footer-col">
+        <div class="footer-col-title">Unidades</div>
+        <a href="#mercados">Proteínas</a>
+        <a href="#mercados">Alimentos Básicos</a>
+        <a href="#mercados">Soluciones Comerciales</a>
+        <a href="#mercados">Más Allá de los Alimentos</a>
+        <a href="#mercados">Energías Renovables</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#nosotros">Contexto de mercado</a>
+        <a href="#nosotros">Historia</a>
+        <a href="#nosotros">Valores</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <!-- Contacto: fila completa, 3 líneas -->
+      <div class="footer-col footer-col--contact">
+        <div class="footer-col-title">Contacto</div>
+        <span class="footer-contact-row">
+          <a href="mailto:info@tpsglobal.com">info@tpsglobal.com</a>
+          <span class="footer-contact-sep">·</span>
+          <a href="tel:+5491100000000">+54 9 11 0000 0000</a>
+        </span>
+        <span>Buenos Aires, Argentina</span>
+        <a href="https://market.themeatspot.com/" target="_blank" rel="noopener">Tienda online →</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 The Partner Spot ®. Todos los derechos reservados.</span>
+      <span class="footer-bottom-tag">TPS · Tu socio a largo plazo</span>
+    </div>
+
+  </footer>
+
+  <!-- ======================================================
+       SCRIPT — Header scroll behavior
+       ====================================================== -->
+  <script>
+    // Header scroll
+    const header = document.getElementById('site-header');
+    const onScroll = () => {
+      header.classList.toggle('scrolled', window.scrollY > 64);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Hamburger menu
+    const navToggle = document.querySelector('.nav-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    navToggle.addEventListener('click', () => {
+      const isOpen = header.classList.toggle('menu-open');
+      mobileNav.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    // Close on link click
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        header.classList.remove('menu-open');
+        mobileNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Stats counter animation
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1600;
+      const start = performance.now();
+
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = prefix + current + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+    }
+
+    const statsBar = document.getElementById('stats-bar');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          statsBar.querySelectorAll('.stat-num').forEach(animateCounter);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(statsBar);
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+  <!-- D3 + TopoJSON para el mapa real -->
+  <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+  <script>
+    (async function () {
+      const W = 1000, H = 500;
+
+      const projection = d3.geoEquirectangular()
+        .scale(159.15)
+        .translate([W / 2, H / 2]);
+
+      const path = d3.geoPath().projection(projection);
+      const svg  = d3.select('#world-svg-el');
+
+      // Cargar datos del mundo
+      const world = await fetch('https://unpkg.com/world-atlas@2/countries-110m.json')
+        .then(r => r.json());
+
+      // Países — relleno TPS
+      svg.append('g')
+        .selectAll('path')
+        .data(topojson.feature(world, world.objects.countries).features)
+        .join('path')
+        .attr('d', path)
+        .attr('fill', 'rgba(0,46,71,0.10)')
+        .attr('stroke', 'rgba(242,236,227,1)')
+        .attr('stroke-width', '0.7');
+
+      // Líneas de flujo: cada origen → Cuba (geodésicas reales)
+      const cuba    = [-79, 22];
+      const origins = [
+        [-106, 56],  // Canadá
+        [-98,  39],  // Estados Unidos
+        [-64, -34],  // Argentina
+        [-56, -33],  // Uruguay
+        [-3,   40],  // España
+        [30,   27],  // Egipto
+        [90,   60],  // Rusia
+        [24,  -29],  // Sudáfrica
+      ];
+
+      svg.append('g')
+        .selectAll('path')
+        .data(origins)
+        .join('path')
+        .attr('d', d => path({ type: 'LineString', coordinates: [d, cuba] }))
+        .attr('fill', 'none')
+        .attr('stroke', 'rgba(224,127,0,0.38)')
+        .attr('stroke-width', '1.1')
+        .attr('stroke-dasharray', '4 6');
+
+    })().catch(console.error);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercados — The Partner Spot</title>
+  <link rel="stylesheet" href="styles-v2.css">
+  <style>
+    /* ============================================================
+       MERCADOS v3 — page-specific styles
+       ============================================================ */
+
+    /* ---- Banner ---- */
+    .mkt-banner {
+      background: var(--tps-deep-blue);
+      padding: 160px clamp(40px, 5.5vw, 80px) 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mkt-banner-watermark {
+      position: absolute;
+      right: -20px;
+      bottom: -60px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(120px, 18vw, 280px);
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+      color: var(--tps-hueso);
+      opacity: 0.05;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .mkt-banner-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: end;
+    }
+
+    .mkt-banner-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(48px, 6.5vw, 108px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--tps-hueso);
+      margin: 20px 0 0;
+    }
+
+    .mkt-banner-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--tps-amber);
+    }
+
+    .mkt-banner-desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.65;
+      color: #B8CAD3;
+      margin: 0;
+      align-self: end;
+    }
+
+    /* ============================================================
+       EXPLORER — el bloque principal
+       ============================================================ */
+    .mkt-explorer {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      height: 62vh;
+      min-height: 480px;
+      max-height: 620px;
+    }
+
+    /* ---- Left tabs ---- */
+    .mkt-tabs {
+      background: var(--tps-deep-blue);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .mkt-tabs::-webkit-scrollbar { display: none; }
+
+    .mkt-tab {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 32px;
+      flex: 1;
+      min-height: 80px;
+      cursor: pointer;
+      border: none;
+      border-left: 3px solid transparent;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: transparent;
+      text-align: left;
+      transition: background 240ms ease, border-color 240ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mkt-tab:last-child { border-bottom: none; }
+
+    .mkt-tab::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.04);
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+
+    .mkt-tab:hover::before { opacity: 1; }
+
+    .mkt-tab.active {
+      border-left-color: var(--cat-clr);
+      background: rgba(255,255,255,0.055);
+    }
+
+    .mkt-tab-n {
+      font-family: var(--font-accent);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.45);
+      flex-shrink: 0;
+      width: 24px;
+    }
+
+    .mkt-tab-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mkt-tab-sub {
+      font-family: var(--font-accent);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mkt-tab-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(14px, 1.3vw, 17px);
+      letter-spacing: -0.01em;
+      color: var(--tps-hueso);
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0.7;
+      transition: opacity 200ms ease;
+    }
+
+    .mkt-tab.active .mkt-tab-name { opacity: 1; }
+
+    .mkt-tab-arrow {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 220ms ease, transform 220ms ease, background 200ms ease, color 200ms ease;
+    }
+
+    .mkt-tab.active .mkt-tab-arrow {
+      opacity: 1;
+      transform: translateX(0);
+      background: var(--cat-clr);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    /* ---- Right panels ---- */
+    .mkt-panels {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mkt-panel {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 480ms ease;
+    }
+
+    .mkt-panel.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mkt-panel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.06);
+      transition: transform 560ms cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .mkt-panel.active .mkt-panel-img {
+      transform: scale(1.0);
+    }
+
+    /* Gradient overlay */
+    .mkt-panel-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.12) 0%,
+        rgba(0,0,0,0.04) 30%,
+        rgba(0,0,0,0.35) 60%,
+        rgba(0,0,0,0.82) 100%
+      );
+    }
+
+    /* Color tint from category */
+    .mkt-panel-tint {
+      position: absolute;
+      inset: 0;
+      opacity: 0.28;
+      mix-blend-mode: multiply;
+    }
+
+    /* Watermark number */
+    .mkt-panel-watermark {
+      position: absolute;
+      top: -20px;
+      right: 32px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(140px, 18vw, 240px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #fff;
+      opacity: 0.06;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Content block at bottom */
+    .mkt-panel-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .mkt-panel-eyebrow {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cat-clr-light, rgba(255,255,255,0.5));
+    }
+
+    .mkt-panel-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(32px, 3.8vw, 60px);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: #fff;
+      margin: 0;
+    }
+
+    .mkt-panel-desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.7);
+      margin: 0;
+      max-width: 560px;
+    }
+
+    .mkt-panel-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .mkt-panel-tag {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+    }
+
+    .mkt-panel-origin {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-accent);
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .mkt-panel-origin span {
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+
+    /* Badge top-right */
+    .mkt-panel-badge {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 14px;
+      padding: 12px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .mkt-panel-badge-label {
+      font-family: var(--font-accent);
+      font-weight: 600;
+      font-size: 8.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .mkt-panel-badge-value {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 900px) {
+      .mkt-explorer {
+        grid-template-columns: 240px 1fr;
+        max-height: 700px;
+      }
+
+      .mkt-tab { padding: 0 22px; gap: 12px; }
+      .mkt-tab-sub { display: none; }
+      .mkt-tab-name { font-size: 13px; }
+      .mkt-tab-arrow { display: none; }
+
+      .mkt-panel-content { padding: 28px 36px; }
+      .mkt-panel-name { font-size: clamp(26px, 4.5vw, 44px); }
+    }
+
+    @media (max-width: 640px) {
+      .mkt-banner { padding: 130px 20px 56px; }
+      .mkt-banner-inner { grid-template-columns: 1fr; gap: 24px; }
+
+      .mkt-explorer {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        height: auto;
+        max-height: none;
+      }
+
+      /* Mobile tabs: vertical stack */
+      .mkt-tabs {
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: visible;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .mkt-tab {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 14px;
+        padding: 16px 20px;
+        flex: none;
+        min-height: 56px;
+        min-width: unset;
+        width: 100%;
+        border-left: 3px solid transparent;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        border-right: none;
+      }
+
+      .mkt-tab.active {
+        border-left-color: var(--cat-clr);
+        border-bottom-color: rgba(255,255,255,0.07);
+      }
+
+      .mkt-tab:last-child { border-bottom: none; }
+
+      .mkt-tab-n { width: 22px; font-size: 10px; flex-shrink: 0; color: rgba(255,255,255,0.45); }
+      .mkt-tab-sub { display: none; }
+      .mkt-tab-name { font-size: 13px; white-space: normal; line-height: 1.25; }
+      .mkt-tab-arrow { display: none; }
+
+      /* Mobile panel: below tabs */
+      .mkt-panels { height: 68vw; min-height: 280px; max-height: 460px; position: relative; }
+
+      .mkt-panel-content { padding: 20px 24px; gap: 10px; }
+      .mkt-panel-name { font-size: clamp(22px, 7vw, 36px); }
+      .mkt-panel-desc { font-size: 13px; max-width: 100%; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .mkt-panel-watermark { font-size: 120px; }
+      .mkt-panel-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======================================================
+       HEADER
+       ====================================================== -->
+  <header class="site-header scrolled" id="site-header">
+    <div class="header-inner">
+
+      <a href="index-v2.html" class="header-logo" style="opacity:1;pointer-events:auto;transform:none">
+        <img src="assets/logo-deep-blue-bg.png" alt="The Partner Spot">
+      </a>
+
+      <nav class="header-nav">
+        <a href="#" class="nav-link" style="opacity:1;font-weight:600">Mercados</a>
+        <a href="nosotros-v2.html" class="nav-link">Nosotros</a>
+        <a href="contacto-v2.html" class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="btn-tienda">
+          IR A LA TIENDA
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 17 17 7M9 7h8v8"/>
+          </svg>
+        </a>
+        <button class="nav-toggle" aria-label="Menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#" class="mobile-nav-link">Mercados</a>
+    <a href="nosotros-v2.html" class="mobile-nav-link">Nosotros</a>
+    <a href="contacto-v2.html" class="mobile-nav-link">Contacto</a>
+    <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="mobile-nav-cta">Ir a la tienda →</a>
+  </div>
+
+  <!-- ======================================================
+       BANNER
+       ====================================================== -->
+  <div class="mkt-banner">
+    <div aria-hidden class="mkt-banner-watermark">Cinco.</div>
+    <div class="mkt-banner-inner">
+      <div>
+        <div class="eyebrow" style="color:var(--tps-amber)">Qué comercializamos</div>
+        <h1 class="mkt-banner-title">
+          Cinco<br>categorías<em>,</em><br>una red.
+        </h1>
+      </div>
+      <p class="mkt-banner-desc">
+        Integramos proteínas, alimentos básicos, energía y soluciones comerciales bajo un mismo partner. El objetivo no es vender productos aislados — es sostener la operación completa de nuestros distribuidores.
+      </p>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       EXPLORER
+       ====================================================== -->
+  <div class="mkt-explorer" aria-label="Explorador de categorías">
+
+    <!-- Left: tabs -->
+    <div class="mkt-tabs" role="tablist">
+
+      <button class="mkt-tab active" role="tab" aria-selected="true" data-index="0" style="--cat-clr:#9A2800">
+        <span class="mkt-tab-n">01</span>
+        <span class="mkt-tab-info">
+          <span class="mkt-tab-sub">Carnes &amp; Proteínas</span>
+          <span class="mkt-tab-name">Proteínas</span>
+        </span>
+        <span class="mkt-tab-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </button>
+
+      <button class="mkt-tab" role="tab" aria-selected="false" data-index="1" style="--cat-clr:#474500">
+        <span class="mkt-tab-n">02</span>
+        <span class="mkt-tab-info">
+          <span class="mkt-tab-sub">Primera necesidad</span>
+          <span class="mkt-tab-name">Alimentos Básicos</span>
+        </span>
+        <span class="mkt-tab-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </button>
+
+      <button class="mkt-tab" role="tab" aria-selected="false" data-index="2" style="--cat-clr:#002E47">
+        <span class="mkt-tab-n">03</span>
+        <span class="mkt-tab-info">
+          <span class="mkt-tab-sub">Financiamiento &amp; logística</span>
+          <span class="mkt-tab-name">Soluciones Comerciales</span>
+        </span>
+        <span class="mkt-tab-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </button>
+
+      <button class="mkt-tab" role="tab" aria-selected="false" data-index="3" style="--cat-clr:#472800">
+        <span class="mkt-tab-n">04</span>
+        <span class="mkt-tab-info">
+          <span class="mkt-tab-sub">Electrónicos &amp; construcción</span>
+          <span class="mkt-tab-name">Más Allá de los Alimentos</span>
+        </span>
+        <span class="mkt-tab-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </button>
+
+      <button class="mkt-tab" role="tab" aria-selected="false" data-index="4" style="--cat-clr:#C04A00">
+        <span class="mkt-tab-n">05</span>
+        <span class="mkt-tab-info">
+          <span class="mkt-tab-sub">Energía para operar</span>
+          <span class="mkt-tab-name">Energías Renovables</span>
+        </span>
+        <span class="mkt-tab-arrow" aria-hidden="true">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </button>
+
+    </div>
+
+    <!-- Right: panels -->
+    <div class="mkt-panels" role="tabpanel">
+
+      <!-- Panel 01 — Proteínas -->
+      <div class="mkt-panel active" data-index="0">
+        <img class="mkt-panel-img"
+          src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=1200&q=80&auto=format&fit=crop"
+          alt="Proteínas">
+        <div class="mkt-panel-tint" style="background:#9A2800"></div>
+        <div class="mkt-panel-gradient"></div>
+        <div aria-hidden class="mkt-panel-watermark">01</div>
+        <div class="mkt-panel-badge">
+          <span class="mkt-panel-badge-label">Categoría principal</span>
+          <span class="mkt-panel-badge-value">+60 años</span>
+        </div>
+        <div class="mkt-panel-content">
+          <div class="mkt-panel-eyebrow">Carnes &amp; Proteínas</div>
+          <h2 class="mkt-panel-name">Proteínas</h2>
+          <p class="mkt-panel-desc">Trabajamos con los mejores frigoríficos de Argentina, Uruguay y Brasil para garantizar calidad, trazabilidad y continuidad de abastecimiento — incluso en mercados con restricciones de importación complejas.</p>
+          <div class="mkt-panel-tags">
+            <span class="mkt-panel-tag">Carne vacuna</span>
+            <span class="mkt-panel-tag">Pollo entero</span>
+            <span class="mkt-panel-tag">Cortes porcinos</span>
+            <span class="mkt-panel-tag">Vísceras</span>
+            <span class="mkt-panel-tag">Menudencias</span>
+            <span class="mkt-panel-tag">Proteínas procesadas</span>
+          </div>
+          <div class="mkt-panel-origin">Origen: <span>Argentina · Uruguay · Brasil · USA</span></div>
+        </div>
+      </div>
+
+      <!-- Panel 02 — Alimentos Básicos -->
+      <div class="mkt-panel" data-index="1">
+        <img class="mkt-panel-img"
+          src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=1200&q=80&auto=format&fit=crop"
+          alt="Alimentos Básicos">
+        <div class="mkt-panel-tint" style="background:#474500"></div>
+        <div class="mkt-panel-gradient"></div>
+        <div aria-hidden class="mkt-panel-watermark">02</div>
+        <div class="mkt-panel-badge">
+          <span class="mkt-panel-badge-label">Monedas aceptadas</span>
+          <span class="mkt-panel-badge-value">USD · EUR</span>
+        </div>
+        <div class="mkt-panel-content">
+          <div class="mkt-panel-eyebrow">Primera necesidad</div>
+          <h2 class="mkt-panel-name">Alimentos Básicos</h2>
+          <p class="mkt-panel-desc">La canasta esencial para el mercado del Caribe. Granos, aceites, harinas y azúcar de orígenes verificados en el Mercosur — con condiciones de pago flexibles y volúmenes adaptados a cada distribuidor.</p>
+          <div class="mkt-panel-tags">
+            <span class="mkt-panel-tag">Arroz largo fino</span>
+            <span class="mkt-panel-tag">Porotos y legumbres</span>
+            <span class="mkt-panel-tag">Aceite de girasol</span>
+            <span class="mkt-panel-tag">Aceite de soja</span>
+            <span class="mkt-panel-tag">Harina de trigo</span>
+            <span class="mkt-panel-tag">Azúcar blanca</span>
+            <span class="mkt-panel-tag">Granos secos</span>
+          </div>
+          <div class="mkt-panel-origin">Origen: <span>Argentina · Uruguay · Paraguay · Brasil</span></div>
+        </div>
+      </div>
+
+      <!-- Panel 03 — Soluciones Comerciales -->
+      <div class="mkt-panel" data-index="2">
+        <img class="mkt-panel-img"
+          src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80&auto=format&fit=crop"
+          alt="Soluciones Comerciales">
+        <div class="mkt-panel-tint" style="background:#002E47"></div>
+        <div class="mkt-panel-gradient"></div>
+        <div aria-hidden class="mkt-panel-watermark">03</div>
+        <div class="mkt-panel-badge">
+          <span class="mkt-panel-badge-label">Respuesta garantizada</span>
+          <span class="mkt-panel-badge-value">48 hs</span>
+        </div>
+        <div class="mkt-panel-content">
+          <div class="mkt-panel-eyebrow">Financiamiento &amp; logística</div>
+          <h2 class="mkt-panel-name">Soluciones Comerciales</h2>
+          <p class="mkt-panel-desc">El ecosistema completo para que un distribuidor opere con continuidad en mercados complejos. Pre-financiamos operaciones, gestionamos el despacho y aceptamos múltiples divisas.</p>
+          <div class="mkt-panel-tags">
+            <span class="mkt-panel-tag">Pre-financiamiento</span>
+            <span class="mkt-panel-tag">Logística internacional</span>
+            <span class="mkt-panel-tag">Multi-divisa</span>
+            <span class="mkt-panel-tag">Despacho aduanero</span>
+            <span class="mkt-panel-tag">Abastecimiento especial</span>
+            <span class="mkt-panel-tag">Soporte operativo</span>
+          </div>
+          <div class="mkt-panel-origin">Alcance: <span>Caribe · Centroamérica · Mercosur</span></div>
+        </div>
+      </div>
+
+      <!-- Panel 04 — Más Allá de los Alimentos -->
+      <div class="mkt-panel" data-index="3">
+        <img class="mkt-panel-img"
+          src="https://images.unsplash.com/photo-1605732562742-3023a888e56e?w=1200&q=80&auto=format&fit=crop"
+          alt="Más Allá de los Alimentos">
+        <div class="mkt-panel-tint" style="background:#472800"></div>
+        <div class="mkt-panel-gradient"></div>
+        <div aria-hidden class="mkt-panel-watermark">04</div>
+        <div class="mkt-panel-badge">
+          <span class="mkt-panel-badge-label">Categorías activas</span>
+          <span class="mkt-panel-badge-value">+12</span>
+        </div>
+        <div class="mkt-panel-content">
+          <div class="mkt-panel-eyebrow">Electrónicos &amp; construcción</div>
+          <h2 class="mkt-panel-name">Más Allá de los Alimentos</h2>
+          <p class="mkt-panel-desc">Porque los distribuidores en mercados como Cuba o Haití necesitan más que alimentos. Respondemos a la demanda de categorías estratégicas con la misma seriedad y respaldo que el resto de nuestra oferta.</p>
+          <div class="mkt-panel-tags">
+            <span class="mkt-panel-tag">Electrónicos de consumo</span>
+            <span class="mkt-panel-tag">Materiales de construcción</span>
+            <span class="mkt-panel-tag">Equipamiento industrial</span>
+            <span class="mkt-panel-tag">Artículos del hogar</span>
+            <span class="mkt-panel-tag">Categorías a medida</span>
+          </div>
+          <div class="mkt-panel-origin">Según demanda: <span>origen flexible por región</span></div>
+        </div>
+      </div>
+
+      <!-- Panel 05 — Energías Renovables -->
+      <div class="mkt-panel" data-index="4">
+        <img class="mkt-panel-img"
+          src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=80&auto=format&fit=crop"
+          alt="Energías Renovables">
+        <div class="mkt-panel-tint" style="background:#C04A00"></div>
+        <div class="mkt-panel-gradient"></div>
+        <div aria-hidden class="mkt-panel-watermark">05</div>
+        <div class="mkt-panel-badge">
+          <span class="mkt-panel-badge-label">Categoría en crecimiento</span>
+          <span class="mkt-panel-badge-value">↑ 2024</span>
+        </div>
+        <div class="mkt-panel-content">
+          <div class="mkt-panel-eyebrow">Energía para operar</div>
+          <h2 class="mkt-panel-name">Energías Renovables</h2>
+          <p class="mkt-panel-desc">En mercados con cortes frecuentes o infraestructura eléctrica limitada, la energía es una necesidad operativa. Proveemos soluciones fotovoltaicas para que distribuidores y negocios operen sin depender de la red.</p>
+          <div class="mkt-panel-tags">
+            <span class="mkt-panel-tag">Paneles solares</span>
+            <span class="mkt-panel-tag">Sistemas de almacenamiento</span>
+            <span class="mkt-panel-tag">Inversores</span>
+            <span class="mkt-panel-tag">Soluciones off-grid</span>
+            <span class="mkt-panel-tag">Equipamiento fotovoltaico</span>
+            <span class="mkt-panel-tag">Generadores</span>
+          </div>
+          <div class="mkt-panel-origin">Origen: <span>España · China · USA</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================
+       CTA FINAL
+       ====================================================== -->
+  <section class="cta-final" id="contacto">
+    <div class="eyebrow reveal" style="justify-content:center; color:var(--tps-deep-blue)">Hablemos</div>
+    <h2 class="cta-final-title reveal" style="--reveal-delay:80ms">
+      ¿Qué necesita<br>
+      <em class="cta-final-em">tu operación<span class="cta-final-dot">?</span></em>
+    </h2>
+    <p class="cta-final-body reveal" style="--reveal-delay:160ms">
+      Contanos qué categorías te interesan, qué volúmenes manejás y en qué mercado operás. Un partner comercial se contacta con vos en menos de 48 hs.
+    </p>
+    <div class="cta-final-actions reveal" style="--reveal-delay:240ms">
+      <a href="contacto-v2.html" class="btn-primary">Hacer una consulta</a>
+      <a href="https://market.themeatspot.com/" target="_blank" rel="noopener" class="btn-outline-dark">Ir a la tienda</a>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       FOOTER
+       ====================================================== -->
+  <footer class="site-footer-main" id="footer">
+
+    <div aria-hidden class="footer-watermark">Contá con nosotros.</div>
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <img src="assets/logo-negativo.png" alt="The Partner Spot" class="footer-logo">
+        <p class="footer-tagline">
+          Somos un socio de largo plazo.<br>
+          <em>No un proveedor más.</em>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Unidades</div>
+        <a href="javascript:void(0)" onclick="activateTab(0)">Proteínas</a>
+        <a href="javascript:void(0)" onclick="activateTab(1)">Alimentos Básicos</a>
+        <a href="javascript:void(0)" onclick="activateTab(2)">Soluciones Comerciales</a>
+        <a href="javascript:void(0)" onclick="activateTab(3)">Más Allá de los Alimentos</a>
+        <a href="javascript:void(0)" onclick="activateTab(4)">Energías Renovables</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Empresa</div>
+        <a href="nosotros-v2.html">Nosotros</a>
+        <a href="nosotros-v2.html#historia">Historia</a>
+        <a href="nosotros-v2.html#valores">Valores</a>
+        <a href="contacto-v2.html">Contacto</a>
+      </div>
+
+      <div class="footer-col footer-col--contact">
+        <div class="footer-col-title">Contacto</div>
+        <span class="footer-contact-row">
+          <a href="mailto:info@tpsglobal.com">info@tpsglobal.com</a>
+          <span class="footer-contact-sep">·</span>
+          <a href="tel:+5491100000000">+54 9 11 0000 0000</a>
+        </span>
+        <span>Buenos Aires, Argentina</span>
+        <a href="https://market.themeatspot.com/" target="_blank" rel="noopener">Tienda online →</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 The Partner Spot ®. Todos los derechos reservados.</span>
+      <span class="footer-bottom-tag">TPS · Tu socio a largo plazo</span>
+    </div>
+
+  </footer>
+
+  <!-- ======================================================
+       SCRIPTS
+       ====================================================== -->
+  <script>
+    // Header scroll
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Hamburger
+    const navToggle = document.querySelector('.nav-toggle');
+    const mobileNav = document.getElementById('mobile-nav');
+    navToggle.addEventListener('click', () => {
+      const isOpen = header.classList.toggle('menu-open');
+      mobileNav.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        header.classList.remove('menu-open');
+        mobileNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Explorer tab switching
+    const tabs   = document.querySelectorAll('.mkt-tab');
+    const panels = document.querySelectorAll('.mkt-panel');
+
+    function activateTab(index) {
+      tabs.forEach((t, i) => {
+        t.classList.toggle('active', i === index);
+        t.setAttribute('aria-selected', i === index);
+      });
+      panels.forEach((p, i) => {
+        p.classList.toggle('active', i === index);
+      });
+    }
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => activateTab(i));
+    });
+
+    // Scroll reveal (CTA section)
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>
