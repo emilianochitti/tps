@@ -674,28 +674,33 @@ img { display: block; max-width: 100%; }
 }
 
 .mpin-dot {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--tps-deep-blue);
-  border: 2px solid var(--tps-hueso-soft);
+  border: 2.5px solid var(--tps-hueso-soft);
   position: relative;
   z-index: 2;
   transition: transform 220ms ease;
-  cursor: default;
+  cursor: pointer;
 }
 
 .mpin--featured .mpin-dot {
   background: var(--tps-amber);
-  width: 14px;
-  height: 14px;
+  width: 18px;
+  height: 18px;
   border-color: var(--tps-hueso);
 }
 
 .mpin--hq .mpin-dot {
   background: var(--tps-naranja-terra);
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes lineIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* Pulso Cuba */
