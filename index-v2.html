@@ -526,32 +526,41 @@
         .attr('stroke', 'rgba(242,236,227,1)')
         .attr('stroke-width', '0.7');
 
-      // Líneas de flujo: red mallada — todos los puntos conectados entre sí
+      // Hover: al pasar sobre un punto se despliegan líneas al resto
       const allPoints = [
-        [-79,  22],  // Cuba
-        [-106, 56],  // Canadá
-        [-98,  39],  // Estados Unidos
-        [-64, -34],  // Argentina
-        [-56, -33],  // Uruguay
-        [-3,   40],  // España
-        [30,   27],  // Egipto
-        [90,   60],  // Rusia
-        [24,  -29],  // Sudáfrica
+        [-79,  22], [-106, 56], [-98,  39], [-64, -34], [-56, -33],
+        [-3,   40], [30,   27], [90,   60], [24,  -29],
       ];
-      const pairs = [];
-      for (let i = 0; i < allPoints.length; i++)
-        for (let j = i + 1; j < allPoints.length; j++)
-          pairs.push([allPoints[i], allPoints[j]]);
 
-      svg.append('g')
-        .selectAll('path')
-        .data(pairs)
-        .join('path')
-        .attr('d', d => path({ type: 'LineString', coordinates: d }))
-        .attr('fill', 'none')
-        .attr('stroke', 'rgba(224,127,0,0.38)')
-        .attr('stroke-width', '1.1')
-        .attr('stroke-dasharray', '4 6');
+      const linesG = svg.append('g').attr('class', 'hover-lines');
+
+      document.querySelectorAll('.mpin').forEach((pin, idx) => {
+        if (idx >= allPoints.length) return;
+        const from = allPoints[idx];
+
+        pin.addEventListener('mouseenter', () => {
+          allPoints.forEach((to, toIdx) => {
+            if (toIdx === idx) return;
+            linesG.append('path')
+              .attr('class', 'h-line')
+              .attr('d', path({ type: 'LineString', coordinates: [from, to] }))
+              .attr('fill', 'none')
+              .attr('stroke', 'rgba(224,127,0,0.45)')
+              .attr('stroke-width', '1.8')
+              .attr('stroke-dasharray', '5 8')
+              .attr('opacity', 0)
+              .transition().duration(350)
+              .attr('opacity', 1);
+          });
+        });
+
+        pin.addEventListener('mouseleave', () => {
+          linesG.selectAll('.h-line')
+            .transition().duration(250)
+            .attr('opacity', 0)
+            .on('end', function() { d3.select(this).remove(); });
+        });
+      });
 
     })().catch(console.error);
   </script>
