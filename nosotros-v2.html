@@ -875,14 +875,28 @@
         .attr('stroke', 'rgba(242,236,227,1)')
         .attr('stroke-width', '0.7');
 
-      const cuba = [-79, 22];
-      const origins = [[-106,56],[-98,39],[-64,-34],[-56,-33],[-3,40],[30,27],[90,60],[24,-29]];
+      // Red mallada — todos los puntos conectados entre sí
+      const allPoints = [
+        [-79,  22],  // Cuba
+        [-106, 56],  // Canadá
+        [-98,  39],  // Estados Unidos
+        [-64, -34],  // Argentina
+        [-56, -33],  // Uruguay
+        [-3,   40],  // España
+        [30,   27],  // Egipto
+        [90,   60],  // Rusia
+        [24,  -29],  // Sudáfrica
+      ];
+      const pairs = [];
+      for (let i = 0; i < allPoints.length; i++)
+        for (let j = i + 1; j < allPoints.length; j++)
+          pairs.push([allPoints[i], allPoints[j]]);
 
       svg.append('g')
         .selectAll('path')
-        .data(origins)
+        .data(pairs)
         .join('path')
-        .attr('d', d => path({ type: 'LineString', coordinates: [d, cuba] }))
+        .attr('d', d => path({ type: 'LineString', coordinates: d }))
         .attr('fill', 'none')
         .attr('stroke', 'rgba(224,127,0,0.38)')
         .attr('stroke-width', '1.1')
