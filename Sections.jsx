@@ -59,7 +59,7 @@ function Categorias() {
         </p>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--border-strong)' }}>
-        {cats.map((c, i) => (
+        {cats.map((c) => (
           <a key={c.n} href={`#cat-${c.n}`} style={{
             display: 'grid', gridTemplateColumns: '80px 1.4fr 1fr 280px 40px',
             gap: 32, alignItems: 'center',
@@ -205,24 +205,26 @@ function PorQue() {
 
 // 5. Mapa estilizado
 function Mapa() {
-  // approx lat/lon → svg coords (world map 1000x500, equirectangular)
   const countries = [
-    { name: 'Canadá',        lon: -106, lat: 56,  role: 'origen' },
-    { name: 'Estados Unidos',lon: -98,  lat: 39,  role: 'origen' },
-    { name: 'Argentina',     lon: -64,  lat: -34, role: 'origen', hq: true },
-    { name: 'Uruguay',       lon: -56,  lat: -33, role: 'origen' },
-    { name: 'Cuba',          lon: -79,  lat: 22,  role: 'destino', featured: true },
-    { name: 'Rep. Dominicana',lon:-70.5, lat: 19,  role: 'destino' },
-    { name: 'España',        lon: -3,   lat: 40,  role: 'origen' },
-    { name: 'Egipto',        lon: 30,   lat: 27,  role: 'origen' },
-    { name: 'Sudáfrica',     lon: 24,   lat: -29, role: 'origen' },
-    { name: 'Rusia',         lon: 90,   lat: 60,  role: 'origen' },
+    { name: 'Canadá',         lon: -106, lat: 56,  role: 'origen' },
+    { name: 'Estados Unidos', lon: -98,  lat: 39,  role: 'origen' },
+    { name: 'Argentina',      lon: -64,  lat: -34, role: 'origen', hq: true },
+    { name: 'Uruguay',        lon: -56,  lat: -33, role: 'origen' },
+    { name: 'Cuba',           lon: -79,  lat: 22,  role: 'destino', featured: true },
+    { name: 'Rep. Dominicana',lon: -70.5,lat: 19,  role: 'destino' },
+    { name: 'España',         lon: -3,   lat: 40,  role: 'origen' },
+    { name: 'Egipto',         lon: 30,   lat: 27,  role: 'origen' },
+    { name: 'Sudáfrica',      lon: 24,   lat: -29, role: 'origen' },
+    { name: 'Rusia',          lon: 90,   lat: 60,  role: 'origen' },
   ];
   const project = (lon, lat) => ({
     x: ((lon + 180) / 360) * 1000,
     y: ((90 - lat) / 180) * 500,
   });
-  const argentina = project(-64, -34);
+
+
+  const [hoveredIdx, setHoveredIdx] = React.useState(null);
+
   return (
     <section id="nosotros" style={{ background: 'var(--tps-hueso-soft)', padding: '120px 48px', position: 'relative', overflow: 'hidden' }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'end', marginBottom: 48 }}>
@@ -246,50 +248,58 @@ function Mapa() {
               <stop offset="100%" stopColor="#E07F00" stopOpacity="0"/>
             </radialGradient>
           </defs>
-          {/* world dots — very stylized, hand-placed approximation */}
+          {/* world dots */}
           <g fill="rgba(0,46,71,0.18)">
             {Array.from({length: 800}).map((_,i) => {
-              // dense dot grid on a sphere-ish silhouette (simple noise-free layout)
               const cols = 50, rows = 16;
               const col = i % cols, row = Math.floor(i / cols);
               if (row >= rows) return null;
               const cx = 20 + col * 19;
               const cy = 80 + row * 22;
-              // rough land masses by bounding boxes
               const inBounds = (
-                (cx>100 && cx<320 && cy>110 && cy<240) || // N America
-                (cx>220 && cx<330 && cy>260 && cy<430) || // S America
-                (cx>450 && cx<560 && cy>80 && cy<200)  || // Europe
-                (cx>440 && cx<620 && cy>190 && cy<370) || // Africa
-                (cx>550 && cx<820 && cy>90 && cy<280)  || // Asia
-                (cx>820 && cx<920 && cy>280 && cy<380) // Australia (decorative)
+                (cx>100 && cx<320 && cy>110 && cy<240) ||
+                (cx>220 && cx<330 && cy>260 && cy<430) ||
+                (cx>450 && cx<560 && cy>80 && cy<200)  ||
+                (cx>440 && cx<620 && cy>190 && cy<370) ||
+                (cx>550 && cx<820 && cy>90 && cy<280)  ||
+                (cx>820 && cx<920 && cy>280 && cy<380)
               );
               if (!inBounds) return null;
               return <circle key={i} cx={cx} cy={cy} r={1.6}/>;
             })}
           </g>
 
-          {/* trade flow lines: red mallada — todos los puntos conectados entre sí */}
-          {countries.flatMap((a, i) => countries.slice(i + 1).map((b, j) => {
-            const pa = project(a.lon, a.lat);
-            const pb = project(b.lon, b.lat);
+          {/* hover lines — aparecen con fade al hacer hover sobre un punto */}
+          {hoveredIdx !== null && countries.map((other, j) => {
+            if (j === hoveredIdx) return null;
+            const pa = project(countries[hoveredIdx].lon, countries[hoveredIdx].lat);
+            const pb = project(other.lon, other.lat);
             const mx = (pa.x + pb.x) / 2, my = Math.min(pa.y, pb.y) - 60;
             return (
-              <path key={`${i}-${i+1+j}`} d={`M ${pa.x} ${pa.y} Q ${mx} ${my} ${pb.x} ${pb.y}`} stroke="var(--tps-amber)" strokeWidth="1" fill="none" opacity="0.35" strokeDasharray="3 4"/>
+              <path key={j}
+                d={`M ${pa.x} ${pa.y} Q ${mx} ${my} ${pb.x} ${pb.y}`}
+                stroke="rgba(224,127,0,0.45)" strokeWidth="1.8" fill="none" strokeDasharray="5 8"
+                style={{ animation: 'lineIn 0.35s ease forwards' }}/>
             );
-          }))}
+          })}
 
           {/* points */}
-          {countries.map((c,i) => {
+          {countries.map((c, cidx) => {
             const p = project(c.lon, c.lat);
             const featured = c.featured;
             const hq = c.hq;
             return (
-              <g key={c.name}>
-                {featured && <circle cx={p.x} cy={p.y} r="28" fill="url(#pulse)"/>}
-                <circle cx={p.x} cy={p.y} r={featured ? 7 : (hq ? 6 : 4.5)} fill={featured ? 'var(--tps-amber)' : (hq ? 'var(--tps-naranja-terra)' : 'var(--tps-deep-blue)')} stroke="var(--tps-hueso-soft)" strokeWidth="2"/>
-                <text x={p.x + 10} y={p.y + 4} fontFamily="Sofia Pro" fontSize={featured ? 14 : 11} fontWeight={featured ? 600 : 400} fill="var(--tps-deep-blue)">{c.name}</text>
-                {featured && <text x={p.x + 10} y={p.y + 20} fontFamily="Pilcrow Rounded" fontSize="9" letterSpacing="1.5" fill="var(--tps-naranja-terra)">OPERACIÓN 80%</text>}
+              <g key={c.name} style={{ cursor: 'pointer' }}
+                onMouseEnter={() => setHoveredIdx(cidx)}
+                onMouseLeave={() => setHoveredIdx(null)}>
+                {featured && <circle cx={p.x} cy={p.y} r="32" fill="url(#pulse)"/>}
+                <circle cx={p.x} cy={p.y} r={featured ? 10 : (hq ? 8 : 6.5)}
+                  fill={featured ? 'var(--tps-amber)' : (hq ? 'var(--tps-naranja-terra)' : 'var(--tps-deep-blue)')}
+                  stroke="var(--tps-hueso-soft)" strokeWidth="2.5"/>
+                {/* invisible hit area */}
+                <circle cx={p.x} cy={p.y} r="20" fill="transparent"/>
+                <text x={p.x + 13} y={p.y + 4} fontFamily="Sofia Pro" fontSize={featured ? 14 : 11} fontWeight={featured ? 600 : 400} fill="var(--tps-deep-blue)">{c.name}</text>
+                {featured && <text x={p.x + 13} y={p.y + 20} fontFamily="Pilcrow Rounded" fontSize="9" letterSpacing="1.5" fill="var(--tps-naranja-terra)">OPERACIÓN 80%</text>}
               </g>
             );
           })}
